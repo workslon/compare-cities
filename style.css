@@ -2,10 +2,38 @@
     margin: 0;
     padding: 0;
 }
-
+body {
+    text-align: left !important;
+    font-family: Arial;
+    color: #333;
+}
 section {
     float: left;
     width: 50%;
     box-sizing: border-box;
     padding: 30px;
+}
+#section1 {
+    background: rgb(240, 248, 251);
+}
+#section2 {
+    background: rgb(255, 255, 248);
+}
+table {
+    border: 1px solid #cacaca;
+}
+table th,
+table td {
+    width: 50%;
+    text-align: left;
+}
+center {
+    text-align: left;
+}
+img {
+    padding: 5px;
+    border: 1px solid #999;
+}
+section form {
+    margin-bottom: 30px;
 }

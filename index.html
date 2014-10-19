@@ -5,22 +5,27 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Compare Cities</title>
+        <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
         <link rel="author" href="humans.txt">
     </head>
     <body>
-        <section>
-            <label for="candidate1">Candidate 1</label>
-            <input id="candidate1" name="candidate1" type="text" />
-            <button>Choose</button>
+        <section id="section1">
+            <form action="" class="form-inline">
+                <label for="candidate1">City 1</label>
+                <input id="candidate1" class="form-control" name="candidate1" type="text" />
+                <a href="javascript:void(0)" class="btn btn-primary">Choose</a>
+            </form>
 
             <div id="content1"></div>
         </section>
-        <section>
-            <label for="candidate1">Candidate 1</label>
-            <input id="candidate1" name="candidate1" type="text" />
-            <button>Choose</button>
-
+        <section id="section2">
+            <form action="" class="form-inline">
+                <label for="candidate1">City 2</label>
+                <input id="candidate1" class="form-control" name="candidate1" type="text" />
+                <a href="javascript:void(0)" class="btn btn-primary">Choose</a>
+            </form>
             <div id="content2"></div>
         </section>
 

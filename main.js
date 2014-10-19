@@ -1,82 +1,58 @@
-// !function () {
-//     'use strict';
+!function () {
+    'use strict';
 
-//     var getEntry = function () {
-//             return $(this).prev('input').val();
-//         },
-
-//         getUrl = function (entry) {
-//             return 'http://en.wikipedia.org/w/api.php'
-//                     + '?action=parse'
-//                     + '&format=json'
-//                     + '&prop=text'
-//                     + '&section=0'
-//                     + '&page=' + entry
-//                     +' &callback=?';
-//         },
-
-//         getData = function () {
-//             return $.get(getUrl());
-//         },
-
-//         // showData = function (data) {
-//         //     var $data = $(data),
-//         //         $content = $data.find('#content');
-
-
-//         // },
-
-//         buttonClickHandler = function () {
-//             var $t = $(this),
-//                 $content = $t.next('div');
-
-//             getData()
-//                 .done(function (data) {
-//                     debugger;
-//                     var $data = $(data).find('#content').html();
-
-//                     $content.html($data);
-//                 });
-//         },
-
-//         initButtonClickHandler = function () {
-//             $('button').on('click', buttonClickHandler);
-//         },
-
-//         init = (function () {
-//             initButtonClickHandler();
-//         })();
-// }();
-
-
-
-// $(document).ready(function(){
-
-    $.ajax({
-        type: "GET",
-        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=Jimi_Hendrix&callback=?",
-        contentType: "application/json; charset=utf-8",
-        async: false,
-        dataType: "json",
-        success: function (data, textStatus, jqXHR) {
-
-            debugger;
-
-            var markup = data.parse.text["*"];
-            var blurb = $('<div></div>').html(markup);
-
-            // remove links as they will not work
-            blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
-
-            // remove any references
-            blurb.find('sup').remove();
-
-            // remove cite error
-            blurb.find('.mw-ext-cite-error').remove();
-            $('#article').html($(blurb).find('p'));
-
+    var getEntry = function () {
+            return $(this).prev('input').val();
         },
-        error: function (errorMessage) {
-        }
-    });
-// });
+
+        getUrl = function (entry) {
+            return 'http://en.wikipedia.org/w/api.php'
+                    + '?action=parse'
+                    + '&format=json'
+                    + '&prop=text'
+                    + '&section=0'
+                    + '&page=' + entry
+                    +' &callback=?';
+        },
+
+        getData = function (entry) {
+            return $.ajax({
+                type: "GET",
+                url: getUrl(entry),
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                dataType: "json"
+            });
+        },
+
+        buttonClickHandler = function () {
+            var $t = $(this),
+                $content = $t.parent().next(),
+                entry = getEntry.call(this);
+
+            getData(entry)
+                .done(function (data) {
+                    var data = data.parse,
+                        title = data.title,
+                        $infoBox = (function () {
+                            return $(data.text['*']).filter(function () {
+                                return this.nodeName === 'TABLE';
+                            });
+                        })();
+
+                    $content.html($infoBox);
+                    $('[style]').removeAttr('style');
+                    $('section').find('table tr img').closest('tr').hide();
+                    $('span[id=coordinates]').closest('tr').hide();
+                    $('table').addClass('table table-striped table-hover');
+                });
+        },
+
+        initButtonClickHandler = function () {
+            $('.btn').on('click', buttonClickHandler);
+        },
+
+        init = (function () {
+            initButtonClickHandler();
+        })();
+}();
