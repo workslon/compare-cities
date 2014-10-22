@@ -25,8 +25,10 @@
         # grunt less
         less:
             compile:
+                options:
+                    cleancss: true
                 files:
-                    '<%= cssDir %>/merge.css': '<%= lessDir %>/styles.less'
+                    '<%= cssDir %>/merge.css': '<%= lessDir %>/manifest.less'
 
         # grunt watch
         watch:
@@ -36,6 +38,9 @@
             jade:
                 files: '<%= jadeDir %>/*.jade'
                 tasks: ['jade']
+            less:
+                files: '<%= lessDir %>/manifest.less'
+                tasks: ['less']
 
     # load plugins
     grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -44,4 +49,4 @@
     grunt.loadNpmTasks 'grunt-contrib-watch'
 
     # tasks
-    grunt.registerTask 'default', ['coffee', 'jade', 'less' 'watch']
+    grunt.registerTask 'default', ['coffee', 'jade', 'less', 'watch']

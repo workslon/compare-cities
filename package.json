@@ -9,9 +9,10 @@
     "grunt-contrib-coffee": "latest",
     "grunt-contrib-jade": "latest",
     "grunt-contrib-less": "latest",
-    "grunt-contrib-watch": "latest"
+    "grunt-contrib-watch": "latest",
+    "grunt-customize-bootstrap": "^0.2.0"
   },
   "dependencies": {
-    "normalize.less": "^1.0.0"
+    "normalize.less": "latest"
   }
 }
