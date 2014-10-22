@@ -1,0 +1,13 @@
+{
+  "name": "compare-cities",
+  "description": "Compare Cities with ease",
+  "repository": "",
+  "version": "0.1.0",
+  "devDependencies": {
+    "coffee-script": "latest",
+    "grunt": "latest",
+    "grunt-contrib-coffee": "latest",
+    "grunt-contrib-jade": "latest",
+    "grunt-contrib-watch": "latest"
+  }
+}
