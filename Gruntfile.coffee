@@ -4,26 +4,29 @@
         srcDir: './src'
         coffeeDir: '<%= srcDir %>/coffee'
         jadeDir: '<%= srcDir %>/jade'
+        lessDir: '<%= srcDir %>/less'
         jsDir: '<%= publicDir %>/js'
         cssDir: '<%= publicDir %>/css'
 
         # grunt coffee
         coffee:
             compile:
-                expand: true
-                cwd: '<%= coffeeDir %>'
-                src: ['*.coffee']
-                dest: '<%= jsDir %>'
-                ext: '.js'
                 options:
                     bare: true
-                    preserve_dirs: true
+                files:
+                    '<%= jsDir %>/merge.js': '<%= coffeeDir %>/*.coffee'
 
         # grunt jade
         jade:
             compile:
                 files:
                     '<%= publicDir %>/index.html': '<%= jadeDir %>/index.jade'
+
+        # grunt less
+        less:
+            compile:
+                files:
+                    '<%= cssDir %>/merge.css': '<%= lessDir %>/styles.less'
 
         # grunt watch
         watch:
@@ -36,8 +39,9 @@
 
     # load plugins
     grunt.loadNpmTasks 'grunt-contrib-coffee'
-    grunt.loadNpmTasks 'grunt-contrib-jade';
+    grunt.loadNpmTasks 'grunt-contrib-jade'
+    grunt.loadNpmTasks 'grunt-contrib-less'
     grunt.loadNpmTasks 'grunt-contrib-watch'
 
     # tasks
-    grunt.registerTask 'default', ['coffee', 'jade', 'watch']
+    grunt.registerTask 'default', ['coffee', 'jade', 'less' 'watch']

@@ -8,6 +8,10 @@
     "grunt": "latest",
     "grunt-contrib-coffee": "latest",
     "grunt-contrib-jade": "latest",
+    "grunt-contrib-less": "latest",
     "grunt-contrib-watch": "latest"
+  },
+  "dependencies": {
+    "normalize.less": "^1.0.0"
   }
 }
