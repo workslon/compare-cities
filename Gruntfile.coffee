@@ -2,6 +2,7 @@
     grunt.initConfig
         publicDir: './public'
         srcDir: './src'
+        bowerDir: './bower_components'
         coffeeDir: '<%= srcDir %>/coffee'
         jadeDir: '<%= srcDir %>/jade'
         lessDir: '<%= srcDir %>/less'
@@ -30,6 +31,12 @@
                 files:
                     '<%= cssDir %>/merge.css': '<%= lessDir %>/manifest.less'
 
+        # grunt copy
+        copy:
+            jquery:
+                files:
+                    '<%= jsDir %>/vendor.js': '<%= bowerDir %>/jquery/dist/jquery.min.js'
+
         # grunt watch
         watch:
             coffee:
@@ -46,7 +53,9 @@
     grunt.loadNpmTasks 'grunt-contrib-coffee'
     grunt.loadNpmTasks 'grunt-contrib-jade'
     grunt.loadNpmTasks 'grunt-contrib-less'
+    grunt.loadNpmTasks 'grunt-contrib-concat'
+    grunt.loadNpmTasks 'grunt-contrib-copy'
     grunt.loadNpmTasks 'grunt-contrib-watch'
 
     # tasks
-    grunt.registerTask 'default', ['coffee', 'jade', 'less', 'watch']
+    grunt.registerTask 'default', ['coffee', 'jade', 'less', 'copy','watch']
